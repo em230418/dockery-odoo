@@ -133,9 +133,10 @@ RUN mkdir -p /var/log/dodoo/tests; \
     chown odoo:odoo /var/log/dodoo/loader
 # Phantom for older odoo version
 # Size: ca. 68MB
-RUN export DOWNLOAD_DIR="$(mktemp -d)"; \
-    wget -P ${DOWNLOAD_DIR} -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2; \
-    tar xf ${DOWNLOAD_DIR}/phantomjs-2.1.1-linux-x86_64.tar.bz2; \
-    cp ${DOWNLOAD_DIR}/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/phantomjs; \
-    chmod +x /usr/bin/phantomjs; \
-    rm -rf ${DOWNLOAD_DIR};
+RUN export DOWNLOAD_DIR="$(mktemp -d)" && \
+    cd ${DOWNLOAD_DIR} && \
+    wget -P ${DOWNLOAD_DIR} -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+    tar xf ${DOWNLOAD_DIR}/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+    cp ${DOWNLOAD_DIR}/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/phantomjs && \
+    chmod +x /usr/bin/phantomjs && \
+    rm -rf ${DOWNLOAD_DIR}
